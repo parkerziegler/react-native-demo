@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 import CustomMapView from './components/Map/CustomMapView';
-import DashboardIcon from './components/Dashboard/DashboardIcon';
-import dashboardIcons from './constants/dashboardIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 class Main extends React.Component {
 
@@ -14,20 +13,13 @@ class Main extends React.Component {
     render() {
 
         // point to our reducer to obtain the url
-        const { map } = this.props;
-
-        // map over our dsahboard icons to render them
-        let dashboardItems = dashboardIcons.map((icon, i) => {
-			return (
-				<DashboardIcon name={icon.name} text={icon.text} key={i} />
-			);
-        });
+        const { map, navigation } = this.props;
         
         return (
             <View style={styles.container}>
                 <CustomMapView provider='PROVIDER_DEFAULT' url={map.basemap}/>
-                <View style={styles.dashboard}>
-                    {dashboardItems}
+                <View style={styles.layerControl}>
+                    <Icon name='layers' size={35} color="#FFF"/>
                 </View>
             </View>
         );
@@ -43,6 +35,14 @@ const styles = StyleSheet.create({
     dashboard: {
         flexDirection: 'row',
         backgroundColor: '#000'
+    },
+    layerControl: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        position: 'absolute',
+        top: 50,
+        right: 25,
+        padding: 5,
+        borderRadius: 5
     }
 });
 
