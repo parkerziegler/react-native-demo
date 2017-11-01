@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-// some stateless functional components for our Drawer Navigator
+// some stateless functional components for our Navigator
 export const Filter = ({ navigation }) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
     <Text>Filter</Text>
@@ -10,19 +10,19 @@ export const Filter = ({ navigation }) => (
 
 export const Search = ({ navigation }) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Basemap Switch</Text>
+    <Text>Search</Text>
   </View>
 );
 
 export const Analytics = ({ navigation }) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Basemap Switch</Text>
+    <Text>Analytics</Text>
   </View>
 );
 
 export const Locate = ({ navigation }) => (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Basemap Switch</Text>
+    <Text>Locate</Text>
   </View>
 );
 
