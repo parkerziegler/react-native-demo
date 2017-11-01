@@ -2,13 +2,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import Main from './src/Main';
 import { store } from './index';
-import { Platform } from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { Platform, View, Text } from 'react-native';
+import { TabNavigator, DrawerNavigator } from 'react-navigation';
 import { Filter, Search, Analytics, Locate, Basemaps } from './src/components/Screens/Screens';
 import DashboardIcon from './src/components/Dashboard/DashboardIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-const AppNavigator = TabNavigator(
+const Tabs = TabNavigator(
   {
     Map: {
       screen: Main,
@@ -34,18 +35,18 @@ const AppNavigator = TabNavigator(
         )
       }
     },
-    Search: {
-      screen: Search,
-      navigationOptions: {
-        tabBarLabel: 'Search',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Icon
-            name={focused ? 'ios-search' : 'ios-search-outline'}
-            size={26}
-            style={{ color: tintColor }} />
-        )
-      }
-    },
+    // Search: {
+    //   screen: Search,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Search',
+    //     tabBarIcon: ({ tintColor, focused }) => (
+    //       <Icon
+    //         name={focused ? 'ios-search' : 'ios-search-outline'}
+    //         size={26}
+    //         style={{ color: tintColor }} />
+    //     )
+    //   }
+    // },
     Analytics: {
       screen: Analytics,
       navigationOptions: {
@@ -58,23 +59,35 @@ const AppNavigator = TabNavigator(
         )
       }
     },
-    Locate: {
-      screen: Locate,
-      navigationOptions: {
-        tabBarLabel: 'Locate',
-        tabBarIcon: ({ tintColor, focused }) => (
-          <Icon
-            name={focused ? 'ios-ionic' : 'ios-ionic-outline'}
-            size={26}
-            style={{ color: tintColor }} />
-        )
-      }
-    },
+    // Locate: {
+    //   screen: Locate,
+    //   navigationOptions: {
+    //     tabBarLabel: 'Locate',
+    //     tabBarIcon: ({ tintColor, focused }) => (
+    //       <Icon
+    //         name={focused ? 'ios-ionic' : 'ios-ionic-outline'}
+    //         size={26}
+    //         style={{ color: tintColor }} />
+    //     )
+    //   }
+    // },
     // Basemaps: {
-    //   screen: Basemaps,
+    //   screen: Main, // DrawerNavigator(
+    //   //   {
+    //   //     Basemaps: {
+    //   //       screen: Main
+    //   //     }
+    //   //   },
+    //   //   {
+    //   //     contentComponent: () => <View><Text>Opened up!</Text></View>
+    //   //   }
+    //   // ),
     //   navigationOptions: {
     //     tabBarLabel: 'Basemaps',
-    //     tabBarIcon: () => <DashboardIcon name='ios-map-outline' text='Basemaps' />
+    //     tabBarIcon: ({ tintColor, focused }) => <MaterialIcon
+    //       name='layers'
+    //       size={26}
+    //       style={{ color: tintColor }} />
     //   }
     // },
   }, {
@@ -87,6 +100,17 @@ const AppNavigator = TabNavigator(
         backgroundColor: '#000'
       }
     }
+  }
+);
+
+const AppNavigator = DrawerNavigator(
+  {
+    Tabs: {
+      screen: Tabs
+    }
+  },
+  {
+    contentComponent: () => <View><Text>I'm open!</Text></View>
   }
 );
 
