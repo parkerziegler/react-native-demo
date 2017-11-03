@@ -8,6 +8,7 @@ import { Filter, Search, Analytics, Locate, Basemaps } from './src/components/Sc
 import DashboardIcon from './src/components/Dashboard/DashboardIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import BasemapMenu from './src/components/BasemapMenu/BasemapMenu';
 
 const Tabs = TabNavigator(
   {
@@ -110,7 +111,7 @@ const AppNavigator = DrawerNavigator(
     }
   },
   {
-    contentComponent: () => <View><Text>I'm open!</Text></View>
+    contentComponent: BasemapMenu
   }
 );
 
