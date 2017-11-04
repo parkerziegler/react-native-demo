@@ -5,7 +5,7 @@ A simple demo application for geospatial apps built using React Native.
 This project was bootstrapped using [create-react-native-app](https://facebook.github.io/react-native/docs/getting-started.html). To install:
 
 ```
-git clone https://facebook.github.io/react-native/docs/getting-started.html
+git clone https://github.com/parkerziegler/react-native-demo.git
 cd react-native-demo
 yarn install
 ```
