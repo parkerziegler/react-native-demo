@@ -1,0 +1,1 @@
+export const SWITCH_BASEMAP = 'SWITCH_BASEMAP';
