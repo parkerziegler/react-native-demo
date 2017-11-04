@@ -6,16 +6,16 @@ class BasemapMenu extends React.Component {
 
     render() {
 
-        let sources = ['../../assets/terrain.png', '../../assets/toner.png', '../../assets/watercolor'];
+        let sources = [{path: require('./toner.png'), title: 'Toner', url: "http://c.tile.stamen.com/toner/{z}/{x}/{y}.png"}, {path: require('./terrain.png'), title: 'Terrain', url: "http://c.tile.stamen.com/terrain/{z}/{x}/{y}.png"}, {path: require('./watercolor.png'), title: 'Watercolor', url: "http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.png"}];
 
         let basemapThumbnails = sources.map((source, i) => {
 
-            return <BasemapThumbnail source={source} key={i} />
+            return <BasemapThumbnail source={source.path} title={source.title} url={source.url} key={i} />
         });
 
         return (
             <View style={styles.container}>
-                <Text style={styles.header}>HEADER</Text>
+                <Text style={styles.header}>Basemaps</Text>
                 {basemapThumbnails}
             </View>
         )
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        color: '#FFFFFF'
+        color: '#FFFFFF',
+        fontSize: 20
     }
 });
 
