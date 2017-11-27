@@ -1,16 +1,19 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import BasemapThumbnail from './BasemapThumbnail';
+import basemapSources from './constants';
 
 class BasemapMenu extends React.Component {
 
     render() {
 
-        let sources = [{path: require('./toner.png'), title: 'Toner', url: "http://c.tile.stamen.com/toner/{z}/{x}/{y}.png"}, {path: require('./terrain.png'), title: 'Terrain', url: "http://c.tile.stamen.com/terrain/{z}/{x}/{y}.png"}, {path: require('./watercolor.png'), title: 'Watercolor', url: "http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.png"}];
+        const basemapThumbnails = basemapSources.map((source) => {
 
-        let basemapThumbnails = sources.map((source, i) => {
+            // destructure basemapSources
+            const { path, title, url } = source;
 
-            return <BasemapThumbnail source={source.path} title={source.title} url={source.url} key={i} />
+            // return a BasemapThumbnail component for each
+            return <BasemapThumbnail source={path} title={title} url={url} key={title} />;
         });
 
         return (

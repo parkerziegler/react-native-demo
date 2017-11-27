@@ -36,18 +36,6 @@ const Tabs = TabNavigator(
         )
       }
     },
-    // Search: {
-    //   screen: Search,
-    //   navigationOptions: {
-    //     tabBarLabel: 'Search',
-    //     tabBarIcon: ({ tintColor, focused }) => (
-    //       <Icon
-    //         name={focused ? 'ios-search' : 'ios-search-outline'}
-    //         size={26}
-    //         style={{ color: tintColor }} />
-    //     )
-    //   }
-    // },
     Analytics: {
       screen: Analytics,
       navigationOptions: {
@@ -59,38 +47,7 @@ const Tabs = TabNavigator(
             style={{ color: tintColor }} />
         )
       }
-    },
-    // Locate: {
-    //   screen: Locate,
-    //   navigationOptions: {
-    //     tabBarLabel: 'Locate',
-    //     tabBarIcon: ({ tintColor, focused }) => (
-    //       <Icon
-    //         name={focused ? 'ios-ionic' : 'ios-ionic-outline'}
-    //         size={26}
-    //         style={{ color: tintColor }} />
-    //     )
-    //   }
-    // },
-    // Basemaps: {
-    //   screen: Main, // DrawerNavigator(
-    //   //   {
-    //   //     Basemaps: {
-    //   //       screen: Main
-    //   //     }
-    //   //   },
-    //   //   {
-    //   //     contentComponent: () => <View><Text>Opened up!</Text></View>
-    //   //   }
-    //   // ),
-    //   navigationOptions: {
-    //     tabBarLabel: 'Basemaps',
-    //     tabBarIcon: ({ tintColor, focused }) => <MaterialIcon
-    //       name='layers'
-    //       size={26}
-    //       style={{ color: tintColor }} />
-    //   }
-    // },
+    }
   }, {
     initialRouteName: 'Map',
     headerMode: 'none',

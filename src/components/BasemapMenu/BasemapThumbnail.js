@@ -5,18 +5,20 @@ import { switchBasemap } from '../../actions/mapActions';
 
 const BasemapThumbnail = (props) => {
 
+    const { source, title, url, dispatch } = props;
+
     const onPressHandler = () => {
         console.log('Parkie-Doo');
 
-        props.dispatch(switchBasemap({ url: props.url }));
+        dispatch(switchBasemap({ url }));
     };
 
     return (
         <View>
-            <TouchableOpacity onPress={() => onPressHandler()}>
-                <Image style={styles.thumbnail} source={props.source} />
+            <TouchableOpacity onPress={onPressHandler()}>
+                <Image style={styles.thumbnail} source={source} />
             </TouchableOpacity>
-            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.title}>{title}</Text>
         </View>
     )
 };
@@ -39,7 +41,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         maps: state.mapReducer,
         source: ownProps.source,
-        title: ownProps.title
+        title: ownProps.title,
+        url: ownProps.url
     };
 };
 

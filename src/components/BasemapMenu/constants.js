@@ -1,0 +1,1 @@
+export default basemapSources = [{path: require('./toner.png'), title: 'Toner', url: "http://c.tile.stamen.com/toner/{z}/{x}/{y}.png"}, {path: require('./terrain.png'), title: 'Terrain', url: "http://c.tile.stamen.com/terrain/{z}/{x}/{y}.png"}, {path: require('./watercolor.png'), title: 'Watercolor', url: "http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.png"}];
