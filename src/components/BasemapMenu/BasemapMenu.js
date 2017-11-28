@@ -5,7 +5,13 @@ import basemapSources from './constants';
 
 class BasemapMenu extends React.Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
+
+        const { navigation } = this.props;
 
         const basemapThumbnails = basemapSources.map((source) => {
 
@@ -13,7 +19,7 @@ class BasemapMenu extends React.Component {
             const { path, title, url } = source;
 
             // return a BasemapThumbnail component for each
-            return <BasemapThumbnail source={path} title={title} url={url} key={title} />;
+            return <BasemapThumbnail source={path} title={title} url={url} key={title} navigation={navigation} />;
         });
 
         return (
