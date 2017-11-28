@@ -19,7 +19,7 @@ class Main extends React.Component {
             <View style={styles.container}>
                 <CustomMapView provider='PROVIDER_DEFAULT' url={map.basemap}/>
                 <View style={styles.layerControl}>
-                    <Icon name='layers' size={35} color="#FFF" onPress={() => navigation.navigate('DrawerToggle')}/>
+                    <Icon name='layers' size={35} color="#FFF" onPress={() => navigation.navigate('DrawerOpen')}/>
                 </View>
             </View>
         );
