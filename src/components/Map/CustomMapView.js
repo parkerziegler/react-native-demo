@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { View, Dimensions, StyleSheet, Text, AlertIOS } from 'react-native';
+import { connect } from 'react-redux';
 import MapView, { MAP_TYPES, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as _ from 'lodash';
+import { storeCrimeData } from '../../actions/mapActions';
 
 const { width, height } = Dimensions.get('window');
 const screenWidth = width;
 const screenHeight = height;
 
-export default class CustomMapView extends Component {
+class CustomMapView extends Component {
 
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			crimeData: null,
 			location: null,
 			error: null
 		};
@@ -21,16 +22,16 @@ export default class CustomMapView extends Component {
 
 	componentDidMount() {
 
+		const { maps, dispatch } = this.props;
+
 		// get all crime data from city of seattle
 		fetch('https://data.seattle.gov/resource/pu5n-trf4.json')
 			.then((response) => {
 				return response.json();
 			})
 			.then((crimeData) => {
-				this.setState({
-					...this.state,
-					crimeData: crimeData
-				});
+				
+				dispatch(storeCrimeData({ crimeData }));
 			})
 			.catch((err) => {
 				console.log(err);
@@ -38,11 +39,9 @@ export default class CustomMapView extends Component {
 
 		navigator.geolocation.getCurrentPosition((position) => {
 			this.setState({
-				...this.state,
 				location: position.coords
 			}, (error) => {
 				this.setState({
-					...this.state,
 					error: error
 				});
 			});
@@ -57,10 +56,12 @@ export default class CustomMapView extends Component {
 
 	onMarkerTouch(event) {
 		AlertIOS.alert('You tapped a marker.');
-		console.log('Hello!');
 	}
 
   render() {
+
+		const { maps } = this.props;
+		const { location } = this.state;
 
     return (
       <MapView
@@ -77,17 +78,28 @@ export default class CustomMapView extends Component {
         style={styles.map}
       >
 			<MapView.UrlTile urlTemplate={this.props.url} zIndex={-1}/>
-				{this.state.crimeData ?
-					_.map(this.state.crimeData, (crime, i) => {
+				{maps.crimeData ?
+					_.map(maps.crimeData, (crime, i) => {
 
 						return <MapView.Circle onPress={this.onMarkerTouch} center={{latitude: crime.incident_location.coordinates[1], longitude: crime.incident_location.coordinates[0]}}
 						key={i} radius={75} strokeWidth={1} fillColor="rgba(213, 75, 65, 0.75)" strokeColor="rgb(255, 255, 255)" />;
 					}) : null}
-				{this.state.location ? <MapView.Marker onPress={this.onMarkerTouch} coordinate={{latitude: this.state.location.latitude, longitude: this.state.location.longitude}} /> : null}
+				{location ? <MapView.Marker onPress={this.onMarkerTouch} coordinate={{latitude: location.latitude, longitude: location.longitude}} /> : null}
 			</MapView>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+
+	return {
+		maps: state.mapReducer,
+		provider: ownProps.provider,
+		url: ownProps.url
+	};
+};
+
+export default connect(mapStateToProps)(CustomMapView);
 
 const styles = StyleSheet.create({
   map: {
