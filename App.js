@@ -4,7 +4,8 @@ import Main from './src/Main';
 import { store } from './index';
 import { Platform, View, Text } from 'react-native';
 import { TabNavigator, DrawerNavigator } from 'react-navigation';
-import { Filter, Search, Analytics, Locate, Basemaps } from './src/components/Screens/Screens';
+import { Search, Analytics, Locate, Basemaps } from './src/components/Screens/Screens';
+import IncidentContainer from './src/components/Incidents/IncidentContainer';
 import DashboardIcon from './src/components/Dashboard/DashboardIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -24,10 +25,10 @@ const Tabs = TabNavigator(
         )
       }
     },
-    Filter: {
-      screen: Filter,
+    Incidents: {
+      screen: IncidentContainer,
       navigationOptions: {
-        tabBarLabel: 'Filter',
+        tabBarLabel: 'Incidents',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
             name={focused ? 'ios-color-filter' : 'ios-color-filter-outline'}

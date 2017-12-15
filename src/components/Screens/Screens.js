@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Flat } from 'react-native';
 
 // some stateless functional components for our Navigator
 export const Filter = ({ navigation }) => (
