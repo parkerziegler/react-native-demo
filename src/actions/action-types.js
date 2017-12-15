@@ -1,1 +1,2 @@
 export const SWITCH_BASEMAP = 'SWITCH_BASEMAP';
+export const STORE_CRIME_DATA = 'STORE_CRIME_DATA';

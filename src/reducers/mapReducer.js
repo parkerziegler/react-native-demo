@@ -1,7 +1,7 @@
 import * as actions from '../actions/action-types';
 
 const initialState = {
-    geoData: [],
+    crimeData: [],
     basemap: "http://c.tile.stamen.com/toner/{z}/{x}/{y}.png"
 };
 
@@ -17,6 +17,12 @@ const mapReducer = (state = initialState, action) => {
             return {
                 ...state,
                 basemap: action.payload.url
+            };
+        case actions.STORE_CRIME_DATA:
+            
+            return {
+                ...state,
+                crimeData: action.payload.crimeData
             };
         default:
             return state;
