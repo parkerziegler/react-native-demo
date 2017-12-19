@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, StyleSheet, Text, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import MapView, { MAP_TYPES, PROVIDER_DEFAULT } from 'react-native-maps';
+import ClusteredMapView from 'react-native-maps-super-cluster';
 import * as _ from 'lodash';
 import { storeCrimeData } from '../../actions/mapActions';
 
@@ -58,34 +59,35 @@ class CustomMapView extends Component {
 		AlertIOS.alert('You tapped a marker.');
 	}
 
+	renderMarker = (data) => <MapView.Marker key={data.cad_cdw_id} coordinate={{latitude: data.incident_location.coordinates[1], longitude: data.incident_location.coordinates[0]}} />;
+
   render() {
 
 		const { maps } = this.props;
 		const { location } = this.state;
 
     return (
-      <MapView
+      <ClusteredMapView
         initialRegion={{
           latitude: 47.6062,
           longitude: -122.33321,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }}
-        scrollEnabled={true}
-        zoomEnabled={true}
-        pitchEnabled={true}
-        rotateEnabled={true}
-        style={styles.map}
+				}}
+				data={maps.crimeData ? maps.crimeData : [{incident_location: {coordinates: [47.6062, -122.33321]}, cad_cdw_id: "12345"}]}
+				style={styles.map}
+				textStyle={{ color: '#65bc46' }}
+				renderMarker={this.renderMarker}
+        containerStyle={{backgroundColor: 'white', borderColor: '#65bc46'}}
       >
 			<MapView.UrlTile urlTemplate={this.props.url} zIndex={-1}/>
-				{maps.crimeData ?
+				{/* {maps.crimeData ?
 					_.map(maps.crimeData, (crime, i) => {
 
 						return <MapView.Circle onPress={this.onMarkerTouch} center={{latitude: crime.incident_location.coordinates[1], longitude: crime.incident_location.coordinates[0]}}
 						key={i} radius={75} strokeWidth={1} fillColor="rgba(213, 75, 65, 0.75)" strokeColor="rgb(255, 255, 255)" />;
-					}) : null}
-				{location ? <MapView.Marker onPress={this.onMarkerTouch} coordinate={{latitude: location.latitude, longitude: location.longitude}} /> : null}
-			</MapView>
+					}) : null} */}
+			</ClusteredMapView>
     );
   }
 }
