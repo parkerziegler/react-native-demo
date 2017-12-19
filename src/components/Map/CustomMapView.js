@@ -59,12 +59,22 @@ class CustomMapView extends Component {
 		AlertIOS.alert('You tapped a marker.');
 	}
 
-	renderMarker = (data) => <MapView.Marker key={data.cad_cdw_id} coordinate={{latitude: data.incident_location.coordinates[1], longitude: data.incident_location.coordinates[0]}} />;
+	renderMarker = (data) => <MapView.Marker key={data.key} coordinate={data.location} />;
 
   render() {
 
 		const { maps } = this.props;
 		const { location } = this.state;
+		const data = maps.crimeData.map(crime => {
+
+			return {
+				key: crime.cad_cdw_id,
+				location: {
+					latitude: parseFloat(crime.latitude),
+					longitude: parseFloat(crime.longitude)
+				}
+			};
+		});
 
     return (
       <ClusteredMapView
@@ -74,11 +84,11 @@ class CustomMapView extends Component {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
 				}}
-				data={maps.crimeData ? maps.crimeData : [{incident_location: {coordinates: [47.6062, -122.33321]}, cad_cdw_id: "12345"}]}
+				data={data}
 				style={styles.map}
-				textStyle={{ color: '#65bc46' }}
+				textStyle={{ color: "white" }}
 				renderMarker={this.renderMarker}
-        containerStyle={{backgroundColor: 'white', borderColor: '#65bc46'}}
+        containerStyle={{backgroundColor: "rgba(213, 75, 65, 0.75)", borderColor: "white"}}
       >
 			<MapView.UrlTile urlTemplate={this.props.url} zIndex={-1}/>
 				{/* {maps.crimeData ?
