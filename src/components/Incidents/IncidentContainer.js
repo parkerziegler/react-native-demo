@@ -10,7 +10,6 @@ class IncidentContainer extends React.Component {
     }
 
     renderItem = ({ item }) => {
-        console.log(item);
         return <Incident beat={item.zone_beat} type={item.initial_type_description} date={item.event_clearance_date} />
     };
 
